@@ -3557,6 +3557,7 @@ void
 plt_search_process2 (playlist_t *playlist, const char *text, int select_results) {
     LOCK;
     plt_search_reset_int (playlist, select_results);
+    clock_t start = clock();
 
     // convert text to lowercase, to save some cycles
     char lc[1000];
@@ -3653,6 +3654,7 @@ plt_search_process2 (playlist_t *playlist, const char *text, int select_results)
             }
         }
     }
+    fprintf(stderr, "search for '%s', time: %ldms\n", text, (clock()-start)/(CLOCKS_PER_SEC/1000));
     UNLOCK;
 }
 
